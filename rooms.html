@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,10 +8,12 @@
 
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- FontAwesome CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
         body {
-            background-color: #f8f9fa;
+            background-color: var(--bs-tertiary-bg);
         }
 
         /* Smaller Card */
@@ -48,83 +51,141 @@
         }
     </style>
 </head>
+
 <body>
 
-<!--  Navbar -->
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <div class="container">
-        <a class="navbar-brand" href="#">RoomBooking</a>
+    <!--  Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark shadow-sm border-bottom" style="background-color: #0a2540;">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="index.html"><i class="fa-solid fa-hotel me-2"></i>Grand Horizon</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
 
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="rooms.html">Our Rooms</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="reservations.html">My Reservations</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="contact.html">Contact Us</a>
+                    </li>
+                </ul>
+                <button class="btn text-white ms-lg-3 mt-2 mt-lg-0 border-0 fs-5" id="themeToggle"
+                    style="background: transparent;" type="button" title="Toggle Dark Mode">
+                    <i class="fa-solid fa-moon"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
 
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav ms-auto">
-                <li class="nav-item">
-                    <a class="nav-link active" href="#">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Rooms</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Bookings</a>
-                </li>
-            </ul>
+    <!-- Header -->
+    <div class="container mt-4">
+        <h2 class="text-center mb-4">Available Rooms</h2>
+
+        <div class="row" id="roomContainer">
+            <!-- Rooms inserted by JS -->
         </div>
     </div>
-</nav>
 
-<!-- Header -->
-<div class="container mt-4">
-    <h2 class="text-center mb-4">Available Rooms</h2>
-
-    <div class="row" id="roomContainer">
-        <!-- Rooms inserted by JS -->
+    <!-- Booking Modal -->
+    <div class="modal fade" id="bookingModal" tabindex="-1" aria-labelledby="bookingModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header bg-primary text-white">
+                    <h5 class="modal-title" id="bookingModalLabel">Complete Your Booking</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="bookingForm">
+                        <div class="mb-3">
+                            <label for="roomType" class="form-label fw-bold">Selected Room</label>
+                            <input type="text" class="form-control" id="roomType" readonly>
+                        </div>
+                        <div class="mb-3">
+                            <label for="guestName" class="form-label fw-bold">Full Name</label>
+                            <input type="text" class="form-control" id="guestName" placeholder="Enter your full name"
+                                required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="guestEmail" class="form-label fw-bold">Email Address</label>
+                            <input type="email" class="form-control" id="guestEmail" placeholder="Enter your email"
+                                required>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="checkInDate" class="form-label fw-bold">Check-in Date</label>
+                                <input type="date" class="form-control" id="checkInDate" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="checkOutDate" class="form-label fw-bold">Check-out Date</label>
+                                <input type="date" class="form-control" id="checkOutDate" required>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="guestsCount" class="form-label fw-bold">Number of Guests</label>
+                            <select class="form-select" id="guestsCount" required>
+                                <option value="1">1 Guest</option>
+                                <option value="2">2 Guests</option>
+                                <option value="3">3 Guests</option>
+                                <option value="4">4+ Guests</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100 py-2 mt-2 fw-bold">Confirm Booking</button>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
-</div>
 
-<!-- JS -->
-<script>
-   
-//i will use this middle of the devlmnt
+    <!-- JS -->
+    <script>
 
-    // const rooms = [
-    //     {name: "Deluxe Room", price: 50, desc: "AC, WiFi, TV, 2 Beds", img: "assets/images/room1.jpg"},
-    //     {name: "Standard Room", price: 30, desc: "Fan, WiFi, 1 Bed", img: "assets/images/room2.jpg"},
-    //     {name: "Suite Room", price: 100, desc: "Luxury, King Bed", img: "assets/images/room3.jpg"},
-    //     {name: "Family Room", price: 70, desc: "AC, 3 Beds", img: "assets/images/room4.jpg"},
-    //     {name: "Single Room", price: 20, desc: "1 Bed, Fan", img: "assets/images/room5.jpg"},
-    //     {name: "Double Room", price: 40, desc: "2 Beds, WiFi", img: "assets/images/room6.jpg"},
-    //     {name: "Luxury Suite", price: 150, desc: "Premium, AC, TV", img: "assets/images/room7.jpg"},
-    //     {name: "Budget Room", price: 15, desc: "Basic Stay", img: "assets/images/room8.jpg"},
-    //     {name: "Executive Room", price: 80, desc: "Office + Bed", img: "assets/images/room9.jpg"},
-    //     {name: "Penthouse", price: 200, desc: "Top Floor Luxury", img: "assets/images/room10.jpg"},
-    //     {name: "Twin Room", price: 45, desc: "2 Single Beds", img: "assets/images/room11.jpg"},
-    //     {name: "Studio Room", price: 60, desc: "Modern Design", img: "assets/images/room12.jpg"},
-    // ];
+        //i will use this middle of the devlmnt
 
-    const rooms = [
-    {name: "Suite Room", price: 100, desc: "Luxury, King Bed", img: "assets/images/room8.jpg"},
-    {name: "Deluxe Room", price: 50, desc: "AC, WiFi, TV, 2 Beds", img: "assets/images/room2.jpg"},
-    {name: "Family Room", price: 70, desc: "AC, 3 Beds", img: "assets/images/room11.jpg"},
-    {name: "Standard Room", price: 30, desc: "Fan, WiFi, 1 Bed", img: "assets/images/room5.jpg"},
+        // const rooms = [
+        //     {name: "Deluxe Room", price: 50, desc: "AC, WiFi, TV, 2 Beds", img: "assets/images/room1.jpg"},
+        //     {name: "Standard Room", price: 30, desc: "Fan, WiFi, 1 Bed", img: "assets/images/room2.jpg"},
+        //     {name: "Suite Room", price: 100, desc: "Luxury, King Bed", img: "assets/images/room3.jpg"},
+        //     {name: "Family Room", price: 70, desc: "AC, 3 Beds", img: "assets/images/room4.jpg"},
+        //     {name: "Single Room", price: 20, desc: "1 Bed, Fan", img: "assets/images/room5.jpg"},
+        //     {name: "Double Room", price: 40, desc: "2 Beds, WiFi", img: "assets/images/room6.jpg"},
+        //     {name: "Luxury Suite", price: 150, desc: "Premium, AC, TV", img: "assets/images/room7.jpg"},
+        //     {name: "Budget Room", price: 15, desc: "Basic Stay", img: "assets/images/room8.jpg"},
+        //     {name: "Executive Room", price: 80, desc: "Office + Bed", img: "assets/images/room9.jpg"},
+        //     {name: "Penthouse", price: 200, desc: "Top Floor Luxury", img: "assets/images/room10.jpg"},
+        //     {name: "Twin Room", price: 45, desc: "2 Single Beds", img: "assets/images/room11.jpg"},
+        //     {name: "Studio Room", price: 60, desc: "Modern Design", img: "assets/images/room12.jpg"},
+        // ];
 
-    {name: "Deluxe Room", price: 50, desc: "AC, WiFi, TV, 2 Beds", img: "assets/images/room2.jpg"},
-    {name: "Suite Room", price: 100, desc: "Luxury, King Bed", img: "assets/images/room8.jpg"},
-    {name: "Standard Room", price: 30, desc: "Fan, WiFi, 1 Bed", img: "assets/images/room5.jpg"},
-    {name: "Family Room", price: 70, desc: "AC, 3 Beds", img: "assets/images/room11.jpg"},
+        const rooms = [
+            { name: "Suite Room", price: 100, desc: "Luxury, King Bed", img: "assets/images/room8.jpg" },
+            { name: "Deluxe Room", price: 50, desc: "AC, WiFi, TV, 2 Beds", img: "assets/images/room2.jpg" },
+            { name: "Family Room", price: 70, desc: "AC, 3 Beds", img: "assets/images/room11.jpg" },
+            { name: "Standard Room", price: 30, desc: "Fan, WiFi, 1 Bed", img: "assets/images/room5.jpg" },
 
-    {name: "Standard Room", price: 30, desc: "Fan, WiFi, 1 Bed", img: "assets/images/room5.jpg"},
-    {name: "Suite Room", price: 100, desc: "Luxury, King Bed", img: "assets/images/room8.jpg"},
-    {name: "Deluxe Room", price: 50, desc: "AC, WiFi, TV, 2 Beds", img: "assets/images/room2.jpg"},
-    {name: "Family Room", price: 70, desc: "AC, 3 Beds", img: "assets/images/room11.jpg"},
-];
+            { name: "Deluxe Room", price: 50, desc: "AC, WiFi, TV, 2 Beds", img: "assets/images/room2.jpg" },
+            { name: "Suite Room", price: 100, desc: "Luxury, King Bed", img: "assets/images/room8.jpg" },
+            { name: "Standard Room", price: 30, desc: "Fan, WiFi, 1 Bed", img: "assets/images/room5.jpg" },
+            { name: "Family Room", price: 70, desc: "AC, 3 Beds", img: "assets/images/room11.jpg" },
 
-    const container = document.getElementById("roomContainer");
+            { name: "Standard Room", price: 30, desc: "Fan, WiFi, 1 Bed", img: "assets/images/room5.jpg" },
+            { name: "Suite Room", price: 100, desc: "Luxury, King Bed", img: "assets/images/room8.jpg" },
+            { name: "Deluxe Room", price: 50, desc: "AC, WiFi, TV, 2 Beds", img: "assets/images/room2.jpg" },
+            { name: "Family Room", price: 70, desc: "AC, 3 Beds", img: "assets/images/room11.jpg" },
+        ];
 
-    rooms.forEach(room => {
-        container.innerHTML += `
+        const container = document.getElementById("roomContainer");
+
+        rooms.forEach(room => {
+            container.innerHTML += `
             <div class="col-md-3 mb-3">
                 <div class="card room-card shadow">
                     <img src="${room.img}" class="card-img-top" alt="Room">
@@ -139,16 +200,68 @@
                 </div>
             </div>
         `;
-    });
+        });
 
-    function bookRoom(roomName) {
-        alert("You selected: " + roomName);
-    }
+        let bookingModalInstance = null;
 
-</script>
+        function bookRoom(roomName) {
+            // Set the room name in the modal input
+            document.getElementById('roomType').value = roomName;
 
-<!-- Bootstrap JS -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+            // Initialize modal if not already done
+            if (!bookingModalInstance) {
+                bookingModalInstance = new bootstrap.Modal(document.getElementById('bookingModal'));
+            }
+
+            // Show the modal
+            bookingModalInstance.show();
+        }
+
+        // Handle form submission
+        document.getElementById('bookingForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+            alert('Booking successfully confirmed for ' + document.getElementById('roomType').value + '!');
+
+            if (bookingModalInstance) {
+                bookingModalInstance.hide();
+            }
+            this.reset();
+        });
+
+    </script>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Dark Mode Logic -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const toggleBtn = document.getElementById('themeToggle');
+            const icon = toggleBtn.querySelector('i');
+
+            const currentTheme = localStorage.getItem('theme') || 'light';
+            document.documentElement.setAttribute('data-bs-theme', currentTheme);
+            updateIcon(currentTheme);
+
+            toggleBtn.addEventListener('click', () => {
+                const newTheme = document.documentElement.getAttribute('data-bs-theme') === 'dark' ? 'light' : 'dark';
+                document.documentElement.setAttribute('data-bs-theme', newTheme);
+                localStorage.setItem('theme', newTheme);
+                updateIcon(newTheme);
+            });
+
+            function updateIcon(theme) {
+                if (theme === 'dark') {
+                    icon.classList.remove('fa-moon');
+                    icon.classList.add('fa-sun');
+                } else {
+                    icon.classList.remove('fa-sun');
+                    icon.classList.add('fa-moon');
+                }
+            }
+        });
+    </script>
 
 </body>
+
 </html>

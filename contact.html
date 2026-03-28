@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RoomBooking - Contact Us</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- FontAwesome CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            background-color: var(--bs-tertiary-bg);
+        }
+
+        .page-header {
+            background: #212529;
+            color: white;
+            padding: 60px 0;
+            text-align: center;
+        }
+
+        .contact-card {
+            background-color: var(--bs-body-bg);
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+            height: 100%;
+        }
+
+        .icon-circle {
+            width: 50px;
+            height: 50px;
+            background-color: var(--bs-tertiary-bg);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            color: #0d6efd;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!--  Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark shadow-sm border-bottom" style="background-color: #0a2540;">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="index.html"><i class="fa-solid fa-hotel me-2"></i>Grand Horizon</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="rooms.html">Our Rooms</a></li>
+                    <li class="nav-item"><a class="nav-link" href="reservations.html">My Reservations</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="contact.html">Contact Us</a></li>
+                </ul>
+                <button class="btn text-white ms-lg-3 mt-2 mt-lg-0 border-0 fs-5" id="themeToggle"
+                    style="background: transparent;" type="button" title="Toggle Dark Mode">
+                    <i class="fa-solid fa-moon"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header -->
+    <div class="page-header">
+        <div class="container">
+            <h1 class="fw-bold display-5">Get in Touch</h1>
+            <p class="lead mb-0 text-white-50">We are here to help you with any questions or concerns.</p>
+        </div>
+    </div>
+
+    <!-- Contact Content -->
+    <div class="container mt-5 mb-5">
+        <div class="row g-4">
+
+            <!-- Contact Information -->
+            <div class="col-lg-5">
+                <div class="contact-card">
+                    <h3 class="fw-bold mb-4">Contact Information</h3>
+                    <p class="text-muted mb-5">Have a question or need assistance with your booking? Reach out to our
+                        24/7 support team.</p>
+
+                    <div class="d-flex align-items-start mb-4">
+                        <div class="icon-circle"><i class="fa-solid fa-location-dot"></i></div>
+                        <div class="ms-3">
+                            <h6 class="fw-bold mb-1">Our Location</h6>
+                            <p class="text-muted small mb-0">123 Luxury Avenue,<br>Metropolis City, NY 10001</p>
+                        </div>
+                    </div>
+
+                    <div class="d-flex align-items-start mb-4">
+                        <div class="icon-circle"><i class="fa-solid fa-phone"></i></div>
+                        <div class="ms-3">
+                            <h6 class="fw-bold mb-1">Phone Number</h6>
+                            <p class="text-muted small mb-0">+1 (800) 123-4567<br>+1 (800) 987-6543 (Support)</p>
+                        </div>
+                    </div>
+
+                    <div class="d-flex align-items-start mb-4">
+                        <div class="icon-circle"><i class="fa-solid fa-envelope"></i></div>
+                        <div class="ms-3">
+                            <h6 class="fw-bold mb-1">Email Address</h6>
+                            <p class="text-muted small mb-0">info@roombooking.com<br>support@roombooking.com</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Contact Form -->
+             <!-- machn this section la backend code panra neram <form></form> tage ondu podanum method="POST" ndu solli insha allah backend a nan senji tharen ,onakku idea ondu varathuku just pathuko -->
+            <div class="col-lg-7">
+                <div class="contact-card">
+                    <h3 class="fw-bold mb-4">Send Us a Message</h3>
+                    <form
+                        onsubmit="event.preventDefault(); alert('Message sent successfully! We will get back to you soon.'); this.reset();">
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label fw-semibold">Your Name</label>
+                                <input type="text" class="form-control" required placeholder="Mohamed Umair">
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label fw-semibold">Email Address</label>
+                                <input type="email" class="form-control" required placeholder="umair@example.com">
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold">Subject</label>
+                            <input type="text" class="form-control" required placeholder="How can we help?">
+                        </div>
+                        <div class="mb-4">
+                            <label class="form-label fw-semibold">Message</label>
+                            <textarea class="form-control" rows="5" required
+                                placeholder="Write your message here..."></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100 py-2 fw-bold">Send Message</button>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Map Placeholder -->
+        <div class="row mt-4">
+            <div class="col-12">
+                <div class="contact-card p-2" style="height: 400px; overflow: hidden;">
+                    <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d193595.15830869428!2d-74.119763973046!3d40.69766374874431!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c24fa5d33f083b%3A0xc80b8f06e177fe62!2sNew%20York%2C%20NY%2C%20USA!5e0!3m2!1sen!2s!4v1689000000000!5m2!1sen!2s"
+                        width="100%" height="100%" style="border:0; border-radius: 8px;" allowfullscreen=""
+                        loading="lazy"></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Dark Mode Logic -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const toggleBtn = document.getElementById('themeToggle');
+            const icon = toggleBtn.querySelector('i');
+
+            const currentTheme = localStorage.getItem('theme') || 'light';
+            document.documentElement.setAttribute('data-bs-theme', currentTheme);
+            updateIcon(currentTheme);
+
+            toggleBtn.addEventListener('click', () => {
+                const newTheme = document.documentElement.getAttribute('data-bs-theme') === 'dark' ? 'light' : 'dark';
+                document.documentElement.setAttribute('data-bs-theme', newTheme);
+                localStorage.setItem('theme', newTheme);
+                updateIcon(newTheme);
+            });
+
+            function updateIcon(theme) {
+                if (theme === 'dark') {
+                    icon.classList.remove('fa-moon');
+                    icon.classList.add('fa-sun');
+                } else {
+                    icon.classList.remove('fa-sun');
+                    icon.classList.add('fa-moon');
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>
