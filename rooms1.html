@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Room Booking System</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .room-card img {
+            height: 200px;
+            object-fit: cover;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Navbar Section -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+        <a class="navbar-brand" href="#">RoomBooking</a>
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a class="nav-link active" href="#">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Rooms</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Bookings</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- Header -->
+<div class="container mt-4">
+    <h2 class="text-center mb-4">Available Rooms</h2>
+
+    <div class="row">
+
+        <!-- Room 1 -->
+        <div class="col-md-4 mb-4">
+            <div class="card room-card shadow">
+                <img src="https://source.unsplash.com/400x300/?hotel-room" class="card-img-top" alt="Room">
+                <div class="card-body">
+                    <h5 class="card-title">Deluxe Room</h5>
+                    <p class="card-text">AC, WiFi, TV, 2 Beds</p>
+                    <p><strong>$50 / night</strong></p>
+                    <button class="btn btn-primary w-100" onclick="bookRoom('Deluxe Room')">Book Now</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Room 2 -->
+        <div class="col-md-4 mb-4">
+            <div class="card room-card shadow">
+                <img src="https://source.unsplash.com/400x300/?bedroom" class="card-img-top" alt="Room">
+                <div class="card-body">
+                    <h5 class="card-title">Standard Room</h5>
+                    <p class="card-text">Fan, WiFi, 1 Bed</p>
+                    <p><strong>$30 / night</strong></p>
+                    <button class="btn btn-success w-100" onclick="bookRoom('Standard Room')">Book Now</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Room 3 -->
+        <div class="col-md-4 mb-4">
+            <div class="card room-card shadow">
+                <img src="https://source.unsplash.com/400x300/?luxury-room" class="card-img-top" alt="Room">
+                <div class="card-body">
+                    <h5 class="card-title">Suite Room</h5>
+                    <p class="card-text">Luxury, AC, WiFi, TV, King Bed</p>
+                    <p><strong>$100 / night</strong></p>
+                    <button class="btn btn-danger w-100" onclick="bookRoom('Suite Room')">Book Now</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!-- ✅ JS -->
+<script>
+    function bookRoom(roomName) {
+        alert("You selected: " + roomName);
+    }
+</script>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>
